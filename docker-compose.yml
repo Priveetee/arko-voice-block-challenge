@@ -1,0 +1,59 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:java21
+    container_name: minecraft-voice-block
+    restart: unless-stopped
+    ports:
+      - "31877:25565/tcp"
+      - "31878:31878/udp"
+    environment:
+      EULA: "TRUE"
+      TYPE: "FABRIC"
+      VERSION: "1.21.11"
+      FABRIC_LOADER_VERSION: "0.19.5"
+      MODRINTH_DOWNLOAD_DEPENDENCIES: "none"
+      MODRINTH_PROJECTS: |
+        speak-no-blocks:ina38bsi
+        fabric-api:6qAuTtLR
+        simple-voice-chat:CN53keBo
+        lithium:Ow7wA0kG
+        ferrite-core:Ii0gP3D8
+        krypton:O9LmWYR7
+        alternate-current:XdouG8YV
+        servercore:zg8VIycZ
+        spark:gonLOAU1
+      MEMORY: "8G"
+      USE_AIKAR_FLAGS: "true"
+      JVM_XX_OPTS: "-XX:+AlwaysPreTouch -XX:+UseStringDeduplication"
+      TZ: "Europe/Paris"
+      ONLINE_MODE: "TRUE"
+      ENABLE_WHITELIST: "FALSE"
+      ENFORCE_WHITELIST: "FALSE"
+      MAX_PLAYERS: "10"
+      MOTD: "Arko Voice Block Challenge"
+      DIFFICULTY: "normal"
+      MODE: "survival"
+      HARDCORE: "FALSE"
+      PVP: "TRUE"
+      SPAWN_PROTECTION: "0"
+      VIEW_DISTANCE: "10"
+      SIMULATION_DISTANCE: "6"
+      ENTITY_BROADCAST_RANGE_PERCENTAGE: "75"
+      MAX_TICK_TIME: "60000"
+      ENABLE_RCON: "FALSE"
+      ENABLE_QUERY: "FALSE"
+      ENABLE_STATUS: "TRUE"
+      USE_NATIVE_TRANSPORT: "TRUE"
+      NETWORK_COMPRESSION_THRESHOLD: "256"
+      LEVEL: "voice_block_world"
+      UID: "1000"
+      GID: "1000"
+    volumes:
+      - ./data:/data
+      - ./config:/config:ro
+    deploy:
+      resources:
+        limits:
+          memory: 12G
+    stdin_open: true
+    tty: true
