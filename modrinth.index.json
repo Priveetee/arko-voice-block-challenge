@@ -1,18 +1,18 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "arko-voice-block-challenge-1.0.0",
+  "versionId": "arko-voice-block-challenge-1.0.2",
   "name": "Arko Voice Block Challenge",
   "summary": "Voice-controlled block destruction with French commands and proximity voice chat.",
   "files": [
     {
-      "path": "mods/speak-no-blocks-1.0.jar",
+      "path": "mods/speak-no-blocks-1.0-fr.jar",
       "hashes": {
-        "sha1": "4606a492052db7e0ce2c786fb6c22ad32bcb4174",
-        "sha512": "3d571cbe898d7c6275ce5949f67b1a02af51d296082acf937f8467ff2c9079131977990317b8c81210f97e1762366d8036e3d6cc7a06f6b68106aae998a6b473"
+        "sha1": "aee4aaaf4ba94ae9509e91bcdec035d8fb4b0561",
+        "sha512": "7baf67831e6b26009686e1eedb948828f353d17ac67bbcf090c789f11bc93ac451ebd0ad69bc0fed7ab5189bf51c60a5b3b75486ad39004a82cddc5f2be8fbba"
       },
-      "downloads": ["https://cdn.modrinth.com/data/5Xmbfv2v/versions/ina38bsi/speak-no-blocks-1.0.jar"],
-      "fileSize": 25768583,
+      "downloads": ["https://github.com/Priveetee/arko-voice-block-challenge/releases/download/v1.0.2/speak-no-blocks-1.0-fr.jar"],
+      "fileSize": 25768640,
       "env": {"client": "required", "server": "required"}
     },
     {

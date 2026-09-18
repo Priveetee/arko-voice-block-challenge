@@ -26,7 +26,7 @@ Le pack installe automatiquement Fabric, Speak No Blocks, Simple Voice Chat, Fab
 Au premier lancement :
 
 1. Ouvrir la configuration de Speak No Blocks dans le menu des mods.
-2. Télécharger le modèle Vosk local d'environ 1,8 Go.
+2. Télécharger le modèle Vosk français local d'environ 1,4 Go.
 3. Sélectionner le modèle téléchargé.
 4. Autoriser Minecraft à utiliser le microphone.
 5. Se connecter à `ADRESSE_DU_SERVEUR:31877`.
