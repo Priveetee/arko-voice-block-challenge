@@ -1,7 +1,8 @@
 # Arko Voice Block Challenge
 
-Serveur Minecraft Fabric `1.21.11` où les joueurs détruisent les blocs en
-parlant français, avec Simple Voice Chat conservé pour le chat de proximité.
+Serveur Minecraft Fabric `1.21.11` où les joueurs détruisent les blocs, items
+et entités en parlant français, avec Simple Voice Chat conservé pour le chat de
+proximité.
 
 ## Installation en un lien
 
@@ -55,12 +56,28 @@ Ce pack ne contient ni `Speak No Blocks` ni modèle de reconnaissance vocale.
 `Speak No Blocks` est un mod Fabric serveur uniquement. Il segmente les phrases
 avec VAD, attend leur fin, vérifie la confiance Whisper et applique la
 destruction sur le thread serveur. Une phrase naturelle comme « j’ai trouvé de
-l’or » ou « il y a de l’eau » déclenche le bloc correspondant ; une description
-comme « le truc jaune » ne déclenche rien.
+l’or » ou « il y a de l’eau » déclenche la cible correspondante ; une
+description comme « le truc jaune » ne déclenche rien.
+
+Chaque déclenchement annonce le joueur et compte `5 4 3 2 1` avant le boom.
+Le rayon normal est d’environ `129x129` (`radius: 64`), avec un scan étalé sur
+les ticks et limité aux chunks déjà chargés. Le rayon de triche du chat est
+encore plus grand (`cheatRadius: 128`). Les blocs ciblés, les items ciblés et
+les entités correspondantes sont supprimés ; les stacks de l’item ciblé sont
+également retirées des inventaires de tous les joueurs connectés.
 
 Le vocabulaire est généré au démarrage depuis les registres Minecraft chargés,
-les traductions françaises des mods et les noms d’items. Il couvre aussi les
-entités et les blocs ajoutés par d’autres mods, sans liste de cibles à maintenir.
+les traductions françaises des mods et les noms d’items. Ainsi « pioche »
+correspond à toutes les pioches, les pluriels d’entités comme « slimes » sont
+acceptés, et les blocs ajoutés par d’autres mods sont couverts sans liste de
+cibles à maintenir.
+
+Le chat reste normal, mais demander explicitement une ressource, par exemple
+« passe moi 64 de bois », déclenche l’annonce « SALE GROS TRICHEUR » puis la
+zone géante. Une recette serveur ajoute aussi la `Potion de gamble`, une vraie
+potion jetable vanilla : elle tente de récupérer une ressource récemment bannie
+pour toute l’équipe ; en cas d’échec, un autre bloc aléatoire est banni et
+disparaît.
 
 ## Maintenance
 
