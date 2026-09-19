@@ -30,9 +30,10 @@ Ports à transférer sur le routeur :
 
 ## Installation joueur
 
-Les joueurs n’installent pas `Speak No Blocks`, ne téléchargent aucun modèle
-Whisper/Vosk et ne configurent aucune reconnaissance vocale. Ils gardent leur
-installation Simple Voice Chat existante, puis se connectent à :
+Les joueurs installent le petit mod `Speak No Blocks` inclus dans le pack Prism
+et gardent Simple Voice Chat. Ce mod client ne contient ni modèle, ni moteur de
+reconnaissance, ni configuration micro : il affiche seulement le compte à
+rebours HUD envoyé par le serveur. Ils se connectent ensuite à :
 
 ```text
 ADRESSE_DU_SERVEUR:31877
@@ -49,22 +50,25 @@ importe ce lien :
 https://github.com/Priveetee/arko-voice-block-challenge/releases/latest/download/arko-voice-block-challenge.mrpack
 ```
 
-Ce pack ne contient ni `Speak No Blocks` ni modèle de reconnaissance vocale.
+Ce pack contient le HUD client et les optimisations Sodium, Lithium, FerriteCore,
+ImmediatelyFast, EntityCulling et Dynamic FPS. Il ne contient aucun modèle de
+reconnaissance vocale.
 
 ## Fonctionnement
 
-`Speak No Blocks` est un mod Fabric serveur uniquement. Il segmente les phrases
+`Speak No Blocks` fait toute la logique de jeu côté serveur. Il segmente les phrases
 avec VAD, attend leur fin, vérifie la confiance Whisper et applique la
 destruction sur le thread serveur. Une phrase naturelle comme « j’ai trouvé de
 l’or » ou « il y a de l’eau » déclenche la cible correspondante ; une
 description comme « le truc jaune » ne déclenche rien.
 
-Chaque déclenchement annonce le joueur et compte `5 4 3 2 1` avant le boom.
-Le rayon normal est d’environ `257x257` (`radius: 128`), avec un scan étalé sur
-les ticks et limité aux chunks déjà chargés. Le rayon de triche du chat utilise
-la même zone géante par défaut. Les blocs ciblés, les items ciblés et
-les entités correspondantes sont supprimés ; les stacks de l’item ciblé sont
-également retirées des inventaires de tous les joueurs connectés.
+Chaque déclenchement affiche `5 4 3 2 1` en haut à gauche, en remplaçant le
+chiffre précédent, puis détruit la cible. Le rayon vocal est d’environ `513x513`
+(`radius: 256`) et le rayon d’un nom exact écrit dans le chat atteint `1025x1025`
+(`cheatRadius: 512`). Les chunks hors vue sont chargés/générés puis parcourus.
+Les blocs ciblés, les items ciblés et les entités non hostiles correspondantes
+sont supprimés ; les monstres hostiles, dont l’Ender Dragon, sont toujours
+exclus, y compris au dernier contrôle avant suppression.
 
 Le vocabulaire est généré au démarrage depuis les registres Minecraft chargés,
 les traductions françaises des mods et les noms d’items. Ainsi « pioche »
@@ -72,9 +76,9 @@ correspond à toutes les pioches, les pluriels d’entités comme « slimes » s
 acceptés, et les blocs ajoutés par d’autres mods sont couverts sans liste de
 cibles à maintenir.
 
-Le chat reste normal, mais demander explicitement une ressource, par exemple
-« passe moi 64 de bois », déclenche l’annonce « SALE GROS TRICHEUR » puis la
-zone géante. Une recette serveur ajoute aussi la `Potion de gamble`, une vraie
+Le chat reste normal. Écrire exactement `terre`, `eau`, `diamant`, etc. est la
+commande de challenge et n’est pas réaffiché dans le chat ; les phrases
+ordinaires restent visibles. Une recette serveur ajoute aussi la `Potion de gamble`, une vraie
 potion jetable vanilla : elle tente de récupérer une ressource récemment bannie
 pour toute l’équipe ; en cas d’échec, un autre bloc aléatoire est banni et
 disparaît.

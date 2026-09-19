@@ -1,9 +1,9 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "arko-voice-block-challenge-1.1.0",
-  "name": "Arko Voice Block Challenge - Simple Voice Chat",
-  "summary": "Client support pack: Fabric API and Simple Voice Chat. Speech recognition runs on the server.",
+  "versionId": "arko-voice-block-challenge-1.3.0",
+  "name": "Arko Voice Block Challenge - Optimized Client",
+  "summary": "Client HUD, Simple Voice Chat and performance mods; all speech recognition stays on the server.",
   "files": [
     {
       "path": "mods/fabric-api-0.141.6+1.21.11.jar",
@@ -23,6 +23,76 @@
       },
       "downloads": ["https://cdn.modrinth.com/data/9eGKb6K1/versions/CN53keBo/voicechat-fabric-1.21.11-2.6.22.jar"],
       "fileSize": 5591115,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/speak-no-blocks-1.0.jar",
+      "hashes": {
+        "sha1": "043408c8b9e31dc74b76219e9f38e090a33781e8",
+        "sha512": "8a3303cec2644c91520bec97e0e931fba4a5712282c9bfe6c0e85bcca25aca625d0a96314dbce1244fab32c4f07a0a45481aedb8ca28413e63bd0d534e59cb35"
+      },
+      "downloads": ["https://raw.githubusercontent.com/Priveetee/arko-voice-block-challenge/main/mods/speak-no-blocks-1.0.jar"],
+      "fileSize": 117593,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/sodium-fabric-0.8.14+mc1.21.11.jar",
+      "hashes": {
+        "sha1": "4a8733fe544168068d12fa94b2ab03e6c0c7bf91",
+        "sha512": "04c43f9e8534b87a52c42ffd51b0e344d4ef92dc9cc52da33d13af6a18bf74b05380d2027f1e0db982698d0aff274c42741c1e21b313b0cd75ed3af005fc98d9"
+      },
+      "downloads": ["https://cdn.modrinth.com/data/AANobbMI/versions/rkdTcxoT/sodium-fabric-0.8.14%2Bmc1.21.11.jar"],
+      "fileSize": 1909150,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/lithium-fabric-0.21.4+mc1.21.11.jar",
+      "hashes": {
+        "sha1": "203bdcb26e97b3217b045e1182651a7d7b6462ec",
+        "sha512": "f14a5c3d2fad786347ca25083f902139694f618b7c103947f2fd067a7c5ee88a63e1ef8926f7d693ea79ed7d00f57317bae77ef9c2d630bf5ed01ac97a752b94"
+      },
+      "downloads": ["https://cdn.modrinth.com/data/gvQqBUqZ/versions/Ow7wA0kG/lithium-fabric-0.21.4%2Bmc1.21.11.jar"],
+      "fileSize": 900462,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/ferritecore-8.2.0-fabric.jar",
+      "hashes": {
+        "sha1": "c2e2f5e008f5bc9f401dfad8ca94909917006b65",
+        "sha512": "3210926a82eb32efd9bcebabe2f6c053daf5c4337eebc6d5bacba96d283510afbde646e7e195751de795ec70a2ea44fef77cb54bf22c8e57bb832d6217418869"
+      },
+      "downloads": ["https://cdn.modrinth.com/data/uXXizFIs/versions/Ii0gP3D8/ferritecore-8.2.0-fabric.jar"],
+      "fileSize": 80138,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/ImmediatelyFast-Fabric-1.14.3+1.21.11.jar",
+      "hashes": {
+        "sha1": "43e451464f979bdf9ff4ac288b358a2f91b79ed8",
+        "sha512": "2564cb28259352c3aa5759aceca62667de08a7860a40910dad40a043af851a074b2d75cef50b9fa6f1971febb3a5ecebe4067cbd4b60e63ef711b85f4bc21407"
+      },
+      "downloads": ["https://cdn.modrinth.com/data/5ZwdcRci/versions/4EwhsTu7/ImmediatelyFast-Fabric-1.14.3%2B1.21.11.jar"],
+      "fileSize": 302709,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/entityculling-fabric-1.10.5-mc1.21.11.jar",
+      "hashes": {
+        "sha1": "270493a6d3a3214495abed9e74f2181817043963",
+        "sha512": "67c4fb10bec6dba3368e65cd57f1bb53b9ca4172b2dc391c3d524f2c6e88c8782d8ff5f9634d549fbf7590296d18042cca84b12f3a8035a12f2ab555420df5a9"
+      },
+      "downloads": ["https://cdn.modrinth.com/data/NNAgCjsB/versions/sP0vNbeN/entityculling-fabric-1.10.5-mc1.21.11.jar"],
+      "fileSize": 1604674,
+      "env": {"client": "required", "server": "unsupported"}
+    },
+    {
+      "path": "mods/dynamic-fps-3.11.6+minecraft-1.21.11-fabric.jar",
+      "hashes": {
+        "sha1": "2e5ab45e69b43812491cfa34f8f7a4ce7623c233",
+        "sha512": "c45652252e2176cb8e2c44dfd9032c617135a100dcf161b9e6e6717803c14d1359d0f940fa10dc1aa6ad80669983f4b9c5636c0c2953d3314e06f893f0cdc736"
+      },
+      "downloads": ["https://cdn.modrinth.com/data/LQ3K71Q1/versions/Fab7e5Th/dynamic-fps-3.11.6%2Bminecraft-1.21.11-fabric.jar"],
+      "fileSize": 219961,
       "env": {"client": "required", "server": "unsupported"}
     }
   ],

@@ -60,7 +60,7 @@ services:
         alternate-current:XdouG8YV
         servercore:zg8VIycZ
         spark:gonLOAU1
-      MEMORY: "8G"
+      MEMORY: "12G"
       USE_AIKAR_FLAGS: "true"
       JVM_XX_OPTS: "-XX:+AlwaysPreTouch -XX:+UseStringDeduplication"
       TZ: "Europe/Paris"
@@ -95,6 +95,6 @@ services:
     deploy:
       resources:
         limits:
-          memory: 12G
+          memory: 14G
     stdin_open: true
     tty: true
