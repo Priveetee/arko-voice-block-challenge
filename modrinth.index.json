@@ -1,9 +1,9 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "arko-voice-block-challenge-1.3.2",
+  "versionId": "arko-voice-block-challenge-1.3.3",
   "name": "Arko Voice Block Challenge - Server Voice",
-  "summary": "Simple Voice Chat and performance mods; speech recognition stays on the server and the countdown appears in chat.",
+  "summary": "Server-side French voice challenge with chat countdown, nearby-first purges and bounded performance.",
   "files": [
     {
       "path": "mods/fabric-api-0.141.6+1.21.11.jar",
@@ -28,11 +28,11 @@
     {
       "path": "mods/speak-no-blocks-1.0.jar",
       "hashes": {
-        "sha1": "70e91f780cab4e218dcf325c4f0a4bf31a1ec448",
-        "sha512": "1c35e6d37a9d4f8728a38657d6e2f796a10a7970b965e8acb5d5eaa7b0f1832d1d9017d072cdbd5da2bef63395565d2d1718451f97f2cc5313b07d099ed8c802"
+        "sha1": "d726d8108acf2c06ae6ee784e9bd7bc3405edd7a",
+        "sha512": "6f837f418212bc3514d4fce9775c6e03860fc2dbec32569559c58c0625df1535a18ff2775ed36915bd4c7bb0d082187fe70517d46bdded80b07f3bcdeadb8fe4"
       },
       "downloads": ["https://raw.githubusercontent.com/Priveetee/arko-voice-block-challenge/main/mods/speak-no-blocks-1.0.jar"],
-      "fileSize": 114745,
+      "fileSize": 117422,
       "env": {"client": "required", "server": "unsupported"}
     },
     {
