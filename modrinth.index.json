@@ -1,20 +1,10 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "arko-voice-block-challenge-1.0.3",
-  "name": "Arko Voice Block Challenge",
-  "summary": "Voice-controlled block destruction with French commands and proximity voice chat.",
+  "versionId": "arko-voice-block-challenge-1.1.0",
+  "name": "Arko Voice Block Challenge - Simple Voice Chat",
+  "summary": "Client support pack: Fabric API and Simple Voice Chat. Speech recognition runs on the server.",
   "files": [
-    {
-      "path": "mods/speak-no-blocks-1.0-fr.jar",
-      "hashes": {
-        "sha1": "76fb6f4fe8d718fb6f2915708d74e3501918e44f",
-        "sha512": "f6263f2d28e35dc27b9005b152b297d53fcbeb0e36cde50e726cc7d96eaded169f971146f2e8ff2130411a909481ef8ff6ba012d3aa08d732fdff261564956ec"
-      },
-      "downloads": ["https://github.com/Priveetee/arko-voice-block-challenge/releases/download/v1.0.3/speak-no-blocks-1.0-fr.jar"],
-      "fileSize": 25768646,
-      "env": {"client": "required", "server": "required"}
-    },
     {
       "path": "mods/fabric-api-0.141.6+1.21.11.jar",
       "hashes": {
@@ -23,7 +13,7 @@
       },
       "downloads": ["https://cdn.modrinth.com/data/P7dR8mSH/versions/6qAuTtLR/fabric-api-0.141.6%2B1.21.11.jar"],
       "fileSize": 2426039,
-      "env": {"client": "required", "server": "required"}
+      "env": {"client": "required", "server": "unsupported"}
     },
     {
       "path": "mods/voicechat-fabric-1.21.11-2.6.22.jar",
@@ -33,56 +23,6 @@
       },
       "downloads": ["https://cdn.modrinth.com/data/9eGKb6K1/versions/CN53keBo/voicechat-fabric-1.21.11-2.6.22.jar"],
       "fileSize": 5591115,
-      "env": {"client": "required", "server": "required"}
-    },
-    {
-      "path": "mods/lithium-fabric-0.21.4+mc1.21.11.jar",
-      "hashes": {
-        "sha1": "203bdcb26e97b3217b045e1182651a7d7b6462ec",
-        "sha512": "f14a5c3d2fad786347ca25083f902139694f618b7c103947f2fd067a7c5ee88a63e1ef8926f7d693ea79ed7d00f57317bae77ef9c2d630bf5ed01ac97a752b94"
-      },
-      "downloads": ["https://cdn.modrinth.com/data/gvQqBUqZ/versions/Ow7wA0kG/lithium-fabric-0.21.4%2Bmc1.21.11.jar"],
-      "fileSize": 900462,
-      "env": {"client": "required", "server": "required"}
-    },
-    {
-      "path": "mods/ferritecore-8.2.0-fabric.jar",
-      "hashes": {
-        "sha1": "c2e2f5e008f5bc9f401dfad8ca94909917006b65",
-        "sha512": "3210926a82eb32efd9bcebabe2f6c053daf5c4337eebc6d5bacba96d283510afbde646e7e195751de795ec70a2ea44fef77cb54bf22c8e57bb832d6217418869"
-      },
-      "downloads": ["https://cdn.modrinth.com/data/uXXizFIs/versions/Ii0gP3D8/ferritecore-8.2.0-fabric.jar"],
-      "fileSize": 80138,
-      "env": {"client": "required", "server": "required"}
-    },
-    {
-      "path": "mods/sodium-fabric-0.8.14+mc1.21.11.jar",
-      "hashes": {
-        "sha1": "4a8733fe544168068d12fa94b2ab03e6c0c7bf91",
-        "sha512": "04c43f9e8534b87a52c42ffd51b0e344d4ef92dc9cc52da33d13af6a18bf74b05380d2027f1e0db982698d0aff274c42741c1e21b313b0cd75ed3af005fc98d9"
-      },
-      "downloads": ["https://cdn.modrinth.com/data/AANobbMI/versions/rkdTcxoT/sodium-fabric-0.8.14%2Bmc1.21.11.jar"],
-      "fileSize": 1909150,
-      "env": {"client": "required", "server": "unsupported"}
-    },
-    {
-      "path": "mods/modmenu-17.0.0.jar",
-      "hashes": {
-        "sha1": "544a8b340ac3918d85bcc7d02eaff5372814354b",
-        "sha512": "146f8c356f86c32e5aab76598e021ac123779c89fc7a51a486fccd2871d2751b02046b4eea3194e52f2e7f38abbb5f78301c8f49bde6e60e1839677db9c84e33"
-      },
-      "downloads": ["https://cdn.modrinth.com/data/mOgUt4GM/versions/Tyk71iSw/modmenu-17.0.0.jar"],
-      "fileSize": 1115809,
-      "env": {"client": "required", "server": "unsupported"}
-    },
-    {
-      "path": "mods/placeholder-api-2.8.2+1.21.10.jar",
-      "hashes": {
-        "sha1": "bbdc920ecff993148cd6e81a208536132245ce40",
-        "sha512": "507ab10b7938dcd14d33121b8462649bdbe575cef248e917dfdf7566078ab5d0195ca1add95eae4863de3f652eb56db0a8669a67d5b5344e094d086f9dab5a08"
-      },
-      "downloads": ["https://cdn.modrinth.com/data/eXts2L7r/versions/qxjzQ9xY/placeholder-api-2.8.2%2B1.21.10.jar"],
-      "fileSize": 268662,
       "env": {"client": "required", "server": "unsupported"}
     }
   ],

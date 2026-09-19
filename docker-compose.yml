@@ -1,8 +1,47 @@
 services:
+  asr:
+    build:
+      context: ./asr
+    container_name: speak-no-blocks-asr
+    restart: unless-stopped
+    runtime: nvidia
+    environment:
+      # The host runs a newer NVIDIA driver than this CUDA base image declares.
+      # Keep the GPU visible while bypassing the image's overly narrow driver
+      # compatibility range; the actual CUDA runtime remains inside the image.
+      NVIDIA_VISIBLE_DEVICES: "all"
+      NVIDIA_DRIVER_CAPABILITIES: "compute,utility"
+      NVIDIA_DISABLE_REQUIRE: "1"
+      WHISPER_MODEL: "large-v3"
+      WHISPER_MODEL_PATH: "/models/models--Systran--faster-whisper-large-v3/snapshots/${WHISPER_MODEL_REVISION:-edaa852ec7e145841d8ffdb056a99866b5f0a478}"
+      WHISPER_COMPUTE_TYPE: "int8_float16"
+      WHISPER_MODEL_ROOT: "/models"
+      # Keep Whisper's context neutral. Enumerating command words here biases
+      # homophones such as "or" toward whichever word appears in the prompt.
+      ASR_INITIAL_PROMPT: ""
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      ASR_MAX_QUEUE: "16"
+      ASR_MAX_AUDIO_SECONDS: "6.5"
+    volumes:
+      - ./asr-models:/models
+    expose:
+      - "8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8080/health"]
+      interval: 10s
+      timeout: 3s
+      start_period: 30s
+      retries: 12
+
   minecraft:
     image: itzg/minecraft-server:java21
+    gpus: all
     container_name: minecraft-voice-block
     restart: unless-stopped
+    depends_on:
+      asr:
+        condition: service_healthy
     ports:
       - "31877:25565/tcp"
       - "31878:31878/udp"
@@ -13,7 +52,6 @@ services:
       FABRIC_LOADER_VERSION: "0.19.5"
       MODRINTH_DOWNLOAD_DEPENDENCIES: "none"
       MODRINTH_PROJECTS: |
-        speak-no-blocks:ina38bsi
         fabric-api:6qAuTtLR
         simple-voice-chat:CN53keBo
         lithium:Ow7wA0kG
@@ -50,6 +88,9 @@ services:
       GID: "1000"
     volumes:
       - ./data:/data
+      # Keep the locally built mod outside the image-helper managed directory.
+      # The image copies this directory into /data/mods on every startup.
+      - ./mods:/mods:ro
       - ./config:/config:ro
     deploy:
       resources:

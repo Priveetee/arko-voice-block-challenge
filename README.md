@@ -1,52 +1,76 @@
 # Arko Voice Block Challenge
 
-Serveur Minecraft Fabric `1.21.11` prêt à déployer avec destruction de blocs à la voix, chat vocal de proximité et optimisations serveur.
+Serveur Minecraft Fabric `1.21.11` où les joueurs détruisent les blocs en
+parlant français, avec Simple Voice Chat conservé pour le chat de proximité.
 
-## Installation serveur en un lien
+## Installation en un lien
 
-Sur la machine qui hébergera le serveur :
+Sur la machine Linux qui possède le GPU NVIDIA et qui hébergera le serveur :
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Priveetee/arko-voice-block-challenge/main/install.sh | bash
 ```
 
-Le script installe ou met à jour le dépôt dans `~/arko-voice-block-challenge`, puis démarre Docker Compose.
+Le script clone le dépôt dans `~/arko-voice-block-challenge`, télécharge une
+seule fois le modèle français faster-whisper (environ 3 Go), construit le
+service CUDA local et démarre Minecraft. Le modèle est ensuite utilisé hors
+ligne : aucune voix ne quitte la machine.
+
+Pré-requis serveur : Docker Compose, pilote NVIDIA fonctionnel (`nvidia-smi`)
+et support GPU NVIDIA pour Docker. Le modèle Hugging Face est public ; si un
+miroir nécessite une authentification, le token peut être fourni uniquement
+pour l’installation avec `HF_TOKEN=...` et n’est jamais enregistré par le
+projet.
 
 Ports à transférer sur le routeur :
 
 - Minecraft : `31877/TCP`
 - Simple Voice Chat : `31878/UDP`
 
-## Installation joueur en un lien
+## Installation joueur
 
-Télécharger le pack client depuis la [dernière release](https://github.com/Priveetee/arko-voice-block-challenge/releases/latest), puis l'importer dans Prism Launcher, Modrinth App ou un launcher compatible `.mrpack`.
+Les joueurs n’installent pas `Speak No Blocks`, ne téléchargent aucun modèle
+Whisper/Vosk et ne configurent aucune reconnaissance vocale. Ils gardent leur
+installation Simple Voice Chat existante, puis se connectent à :
 
-Le pack installe automatiquement Fabric, Speak No Blocks, Simple Voice Chat, Fabric API, Mod Menu, Sodium et les optimisations client. La configuration française est incluse.
+```text
+ADRESSE_DU_SERVEUR:31877
+```
 
-Au premier lancement :
+La touche `V` ouvre la configuration de Simple Voice Chat. Son micro reste le
+transport audio ; le serveur décode les paquets Opus et fait la reconnaissance
+française sur le GPU.
 
-1. Ouvrir la configuration de Speak No Blocks dans le menu des mods.
-2. Télécharger le modèle Vosk français local d'environ 1,4 Go.
-3. Sélectionner le modèle téléchargé.
-4. Autoriser Minecraft à utiliser le microphone.
-5. Se connecter à `ADRESSE_DU_SERVEUR:31877`.
+Pour préparer automatiquement cette installation joueur dans Prism Launcher,
+importe ce lien :
 
-Les mots français courants sont déjà configurés : `bois`, `pierre`, `terre`, `sable`, `fer`, `diamant`, `coffre`, `four`, etc. La touche `V` ouvre la configuration de Simple Voice Chat.
+```text
+https://github.com/Priveetee/arko-voice-block-challenge/releases/latest/download/arko-voice-block-challenge.mrpack
+```
 
-## Architecture
+Ce pack ne contient ni `Speak No Blocks` ni modèle de reconnaissance vocale.
 
-Le mod original `DO NOT SAY THE NAME OF THIS BLOCK!` est client uniquement. Le serveur utilise donc `Speak No Blocks`, qui envoie les blocs reconnus au serveur pour que la destruction soit autoritaire et multijoueur.
+## Fonctionnement
 
-La reconnaissance vocale de Speak No Blocks reste locale au client. Simple Voice Chat utilise séparément le port UDP `31878` pour la conversation de proximité.
+`Speak No Blocks` est un mod Fabric serveur uniquement. Il segmente les phrases
+avec VAD, attend leur fin, vérifie la confiance Whisper et applique la
+destruction sur le thread serveur. Une phrase naturelle comme « j’ai trouvé de
+l’or » ou « il y a de l’eau » déclenche le bloc correspondant ; une description
+comme « le truc jaune » ne déclenche rien.
 
-Mods serveur épinglés : Lithium, FerriteCore, Krypton, Alternate Current, ServerCore et Spark.
+Le vocabulaire est généré au démarrage depuis les registres Minecraft chargés,
+les traductions françaises des mods et les noms d’items. Il couvre aussi les
+entités et les blocs ajoutés par d’autres mods, sans liste de cibles à maintenir.
 
 ## Maintenance
 
 ```bash
 cd ~/arko-voice-block-challenge
+git pull --ff-only
+./provision-model.sh
+docker compose up -d --build --remove-orphans
 docker compose ps
-docker compose logs --tail=200 minecraft
 ```
 
-Les données du monde restent dans `data/` et ne sont jamais publiées dans GitHub.
+Les données du monde restent dans `data/`, le cache du modèle dans
+`asr-models/`, et ces deux répertoires ne sont jamais publiés dans GitHub.
