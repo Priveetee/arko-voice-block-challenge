@@ -60,9 +60,9 @@ l’or » ou « il y a de l’eau » déclenche la cible correspondante ; une
 description comme « le truc jaune » ne déclenche rien.
 
 Chaque déclenchement annonce le joueur et compte `5 4 3 2 1` avant le boom.
-Le rayon normal est d’environ `129x129` (`radius: 64`), avec un scan étalé sur
-les ticks et limité aux chunks déjà chargés. Le rayon de triche du chat est
-encore plus grand (`cheatRadius: 128`). Les blocs ciblés, les items ciblés et
+Le rayon normal est d’environ `257x257` (`radius: 128`), avec un scan étalé sur
+les ticks et limité aux chunks déjà chargés. Le rayon de triche du chat utilise
+la même zone géante par défaut. Les blocs ciblés, les items ciblés et
 les entités correspondantes sont supprimés ; les stacks de l’item ciblé sont
 également retirées des inventaires de tous les joueurs connectés.
 
