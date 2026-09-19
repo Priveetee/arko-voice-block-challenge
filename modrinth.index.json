@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "arko-voice-block-challenge-1.3.0",
+  "versionId": "arko-voice-block-challenge-1.3.1",
   "name": "Arko Voice Block Challenge - Optimized Client",
   "summary": "Client HUD, Simple Voice Chat and performance mods; all speech recognition stays on the server.",
   "files": [
@@ -28,11 +28,11 @@
     {
       "path": "mods/speak-no-blocks-1.0.jar",
       "hashes": {
-        "sha1": "043408c8b9e31dc74b76219e9f38e090a33781e8",
-        "sha512": "8a3303cec2644c91520bec97e0e931fba4a5712282c9bfe6c0e85bcca25aca625d0a96314dbce1244fab32c4f07a0a45481aedb8ca28413e63bd0d534e59cb35"
+        "sha1": "a95f761a0d14f01ae23251743bdac3c22d5faee6",
+        "sha512": "999740588401eff25febabc9f01e8c22524bfaa4c3988d4365628e06ef3d8b7d12fdf716ad084b7393a4f186b2f7e0521b48ff650fff8104b9ae2042ecc89c6e"
       },
       "downloads": ["https://raw.githubusercontent.com/Priveetee/arko-voice-block-challenge/main/mods/speak-no-blocks-1.0.jar"],
-      "fileSize": 117593,
+      "fileSize": 117790,
       "env": {"client": "required", "server": "unsupported"}
     },
     {
