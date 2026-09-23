@@ -1,7 +1,7 @@
 {
   "formatVersion": 1,
   "game": "minecraft",
-  "versionId": "arko-voice-block-challenge-1.4.2",
+  "versionId": "arko-voice-block-challenge-1.4.3",
   "name": "Arko Voice Block Challenge - Server Voice",
   "summary": "Server-side French voice challenge with chat countdown, nearby-first purges and bounded performance.",
   "files": [
@@ -143,8 +143,8 @@
     {
       "path": "mods/color-roulette-1.0.jar",
       "hashes": {
-        "sha1": "bf4ef771cdc4291029b54201e0aa38c301d97969",
-        "sha512": "5cdba08e51412a767daf94c674b0a4347e0fc56b08bc7137e8fd63c007a59b73a52a2af0c6a55e2f26e8e4a1c1211dbc8d219ee32ac3668b899a016aa90a00a5"
+        "sha1": "6a2841940997fee3c80c74e97a317009a76fbea1",
+        "sha512": "41cf8b72f01f77f7f24b3359ea087c379f030cc9a78f1dcdc5a7aba0e2db08b3d6cf4867a4d2de3339e7b7705e349ee203709da7e3459dfb0770f1c129e00bf6"
       },
       "env": {
         "client": "required",
@@ -153,7 +153,7 @@
       "downloads": [
         "https://raw.githubusercontent.com/Priveetee/arko-voice-block-challenge/main/mods/color-roulette-1.0.jar"
       ],
-      "fileSize": 128527
+      "fileSize": 129471
     }
   ],
   "dependencies": {
