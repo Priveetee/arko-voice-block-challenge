@@ -1,4 +1,25 @@
 services:
+  admin:
+    build:
+      context: ./admin
+    container_name: speak-no-blocks-admin
+    restart: unless-stopped
+    environment:
+      ADMIN_HOST: "0.0.0.0"
+      ADMIN_PORT: "8090"
+      RESET_SEED: "${RESET_SEED}"
+      RCON_HOST: "minecraft"
+      RCON_PORT: "25575"
+      RCON_PASSWORD: "${RCON_PASSWORD}"
+      CONTROL_DIR: "/control"
+    ports:
+      - "${ADMIN_PORT:-8090}:8090/tcp"
+    volumes:
+      - ./control:/control
+    depends_on:
+      minecraft:
+        condition: service_started
+
   asr:
     build:
       context: ./asr
@@ -17,7 +38,7 @@ services:
       WHISPER_COMPUTE_TYPE: "int8_float16"
       WHISPER_MODEL_ROOT: "/models"
       # Keep Whisper's context neutral. Enumerating command words here biases
-      # homophones such as "or" toward whichever word appears in the prompt.
+      # homophones toward whichever word appears in the prompt.
       ASR_INITIAL_PROMPT: ""
       HF_HUB_OFFLINE: "1"
       TRANSFORMERS_OFFLINE: "1"
@@ -38,6 +59,7 @@ services:
     image: itzg/minecraft-server:java21
     gpus: all
     container_name: minecraft-voice-block
+    entrypoint: ["/control/minecraft-entrypoint.sh"]
     restart: unless-stopped
     depends_on:
       asr:
@@ -51,15 +73,6 @@ services:
       VERSION: "1.21.11"
       FABRIC_LOADER_VERSION: "0.19.5"
       MODRINTH_DOWNLOAD_DEPENDENCIES: "none"
-      MODRINTH_PROJECTS: |
-        fabric-api:6qAuTtLR
-        simple-voice-chat:CN53keBo
-        lithium:Ow7wA0kG
-        ferrite-core:Ii0gP3D8
-        krypton:O9LmWYR7
-        alternate-current:XdouG8YV
-        servercore:zg8VIycZ
-        spark:gonLOAU1
       MEMORY: "12G"
       USE_AIKAR_FLAGS: "true"
       JVM_XX_OPTS: "-XX:+AlwaysPreTouch -XX:+UseStringDeduplication"
@@ -78,7 +91,9 @@ services:
       SIMULATION_DISTANCE: "6"
       ENTITY_BROADCAST_RANGE_PERCENTAGE: "75"
       MAX_TICK_TIME: "60000"
-      ENABLE_RCON: "FALSE"
+      ENABLE_RCON: "TRUE"
+      RCON_PASSWORD: "${RCON_PASSWORD}"
+      RCON_PORT: "25575"
       ENABLE_QUERY: "FALSE"
       ENABLE_STATUS: "TRUE"
       USE_NATIVE_TRANSPORT: "TRUE"
@@ -88,6 +103,8 @@ services:
       GID: "1000"
     volumes:
       - ./data:/data
+      - ./control:/control
+      - ./backups:/backups
       # Keep the locally built mod outside the image-helper managed directory.
       # The image copies this directory into /data/mods on every startup.
       - ./mods:/mods:ro
@@ -96,5 +113,60 @@ services:
       resources:
         limits:
           memory: 14G
+    stdin_open: true
+    tty: true
+
+  minecraft-lan:
+    image: itzg/minecraft-server:java21
+    container_name: minecraft-voice-block-lan
+    entrypoint: ["/control/minecraft-entrypoint.sh"]
+    restart: unless-stopped
+    depends_on:
+      asr:
+        condition: service_healthy
+    # LAN only: bound to the host LAN IP, never 0.0.0.0, and these host
+    # ports are not forwarded on the router, so no outside access.
+    ports:
+      - "192.168.1.120:31879:25565/tcp"
+      - "192.168.1.120:31880:31880/udp"
+    environment:
+      EULA: "TRUE"
+      TYPE: "FABRIC"
+      VERSION: "1.21.11"
+      FABRIC_LOADER_VERSION: "0.19.5"
+      MODRINTH_DOWNLOAD_DEPENDENCIES: "none"
+      MEMORY: "6G"
+      USE_AIKAR_FLAGS: "true"
+      JVM_XX_OPTS: "-XX:+AlwaysPreTouch -XX:+UseStringDeduplication"
+      TZ: "Europe/Paris"
+      ONLINE_MODE: "TRUE"
+      ENABLE_WHITELIST: "FALSE"
+      ENFORCE_WHITELIST: "FALSE"
+      MAX_PLAYERS: "10"
+      MOTD: "Arko Voice Block Challenge - LAN TEST"
+      DIFFICULTY: "normal"
+      MODE: "survival"
+      PVP: "TRUE"
+      SPAWN_PROTECTION: "0"
+      VIEW_DISTANCE: "10"
+      SIMULATION_DISTANCE: "6"
+      ENABLE_RCON: "TRUE"
+      RCON_PASSWORD: "${RCON_PASSWORD}"
+      RCON_PORT: "25576"
+      ENABLE_QUERY: "FALSE"
+      ENABLE_STATUS: "TRUE"
+      LEVEL: "voice_block_world"
+      UID: "1000"
+      GID: "1000"
+    volumes:
+      - ./data-lan:/data
+      - ./control-lan:/control
+      - ./backups:/backups
+      - ./mods:/mods:ro
+      - ./config-lan:/config:ro
+    deploy:
+      resources:
+        limits:
+          memory: 8G
     stdin_open: true
     tty: true

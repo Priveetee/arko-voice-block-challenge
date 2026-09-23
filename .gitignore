@@ -1,12 +1,17 @@
 data/
 backups/
+data-lan/
+ilorest_logs/
 asr-models/
 mods/*
 !mods/
 !mods/speak-no-blocks-1.0.jar
+!mods/color-roulette-1.0.jar
 .env
 .env.*
 !.env.example
+control/reset-request
+control/reset-request.*.tmp
 __pycache__/
 *.py[cod]
 *.mrpack

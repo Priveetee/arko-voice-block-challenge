@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SNB admin</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/htmx.min.js"></script>
+</head>
+<body>
+  <main class="terminal">
+    <header>
+      <h1>SPEAK NO BLOCKS / ADMIN</h1>
+      <p>serveur minecraft local — outils simples</p>
+    </header>
+
+      <section id="status" class="status" hx-get="/fragments/status" hx-trigger="load, every 3s" hx-swap="innerHTML">
+        lecture de l’état…
+      </section>
+
+      <div id="action-result" class="action-slot" aria-live="polite"></div>
+
+      <fieldset>
+        <legend>monde</legend>
+        <p>Le reset garde une copie dans <code>backups/</code> et tire une nouvelle seed al&eacute;atoire &agrave; chaque fois.</p>
+        <form hx-post="/actions/reset" hx-target="#action-result" hx-swap="innerHTML" hx-confirm="Reset du monde actuel ? Une sauvegarde est conservée." class="line-form">
+          <input type="hidden" name="reset" value="1">
+          <button type="submit" class="danger">reset monde</button>
+        </form>
+      </fieldset>
+
+      <fieldset>
+        <legend>joueur</legend>
+        <p>Les joueurs connectés apparaissent en haut avec leur bouton <code>rendre admin</code>.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>inventaire</legend>
+        <form hx-post="/actions/give" hx-target="#action-result" hx-swap="innerHTML" class="line-form">
+          <label>pseudo <input name="player" pattern="[A-Za-z0-9_]{3,16}" required></label>
+          <label>item <input name="item" value="diamond" pattern="(?:[a-z0-9_.-]+:)?[a-z0-9_./-]{1,96}" required></label>
+          <label>qté <input name="amount" type="number" min="1" max="64" value="1" required></label>
+          <button type="submit">give</button>
+        </form>
+      </fieldset>
+  </main>
+</body>
+</html>

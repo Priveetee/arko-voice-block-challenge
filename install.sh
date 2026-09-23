@@ -22,6 +22,20 @@ else
 fi
 
 cd "${INSTALL_DIR}"
+
+if [ ! -f .env ]; then
+  command -v openssl >/dev/null || { printf '%s\n' 'openssl est requis pour générer les secrets du panneau admin.' >&2; exit 1; }
+  umask 077
+  {
+    printf 'RCON_PASSWORD=%s\n' "$(openssl rand -hex 32)"
+    printf 'ADMIN_TOKEN=%s\n' "$(openssl rand -hex 32)"
+    printf 'ADMIN_PORT=8090\n'
+    printf 'RESET_SEED=-2026091901\n'
+  } > .env
+  chmod 600 .env
+  printf 'Secrets locaux générés dans %s/.env\n' "${INSTALL_DIR}"
+fi
+
 docker compose config -q
 ./provision-model.sh
 docker compose up -d --build --remove-orphans
@@ -47,4 +61,4 @@ wait_for_health() {
 wait_for_health speak-no-blocks-asr
 wait_for_health minecraft-voice-block
 docker compose ps
-printf '\nServeur Minecraft: HOST:31877/TCP\nVoice chat: HOST:31878/UDP\n'
+printf '\nServeur Minecraft: HOST:31877/TCP\nVoice chat: HOST:31878/UDP\nPanneau admin LAN: http://HOST:8090/\n'
