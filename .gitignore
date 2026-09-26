@@ -6,7 +6,6 @@ asr-models/
 mods/*
 !mods/
 !mods/speak-no-blocks-1.0.jar
-!mods/color-roulette-1.0.jar
 .env
 .env.*
 !.env.example
